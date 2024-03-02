@@ -80,7 +80,7 @@ const deleteUser = async (req, res)=>{
         await User.findByIdAndDelete(id);
         res.status(201).json({message : " User deleted Successfully."})
     } catch (error) {
-        res.status(500).json({error : " Internal Server Error. "})
+        res.status(500).json({error : " Internal Server Error. "});
     }
 };
 

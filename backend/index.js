@@ -5,13 +5,12 @@ const { PORT } = process.env;
 const api = require("./routes/api")
 
 app.get( "/", (req, res) => {
-    // console.log(req);
     res.send("Hello world");
 })
 
+//PM2.5 API
 app.use('/api', api.router)
 
-// abc
 app.listen(PORT, ()=>{
     console.log(`Start at port ${PORT}`);
 })

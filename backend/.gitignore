@@ -132,4 +132,5 @@ dist
 
 
 .package-lock.env
+.package-lock.json
 .env

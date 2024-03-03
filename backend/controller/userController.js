@@ -1,4 +1,3 @@
-// import User from "../models/userModel";
 const User = require("../models/userModel");
 
 const createUser = async (req, res) => {
@@ -78,10 +77,9 @@ const deleteUser = async (req, res)=>{
             return res.status(402).json({message : " User Not Found. "})
         }
         await User.findByIdAndDelete(id);
-        res.status(201).json({message : " User deleted Successfully."})
+        res.status(201).json({message : " User deleted Successfully."});
     } catch (error) {
         res.status(500).json({error : " Internal Server Error. "});
     }
 };
-
 module.exports.deleteUser = deleteUser;

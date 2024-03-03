@@ -35,8 +35,8 @@ module.exports.fetch_Location_All = fetch_Location_All;
 
 const fetch_Location_byUserID = async (res, req) =>{
     try{
-        const id = req.params.id;
-        const locations = await Location.find({user_id: id});
+        const user_id = req.params.user_id;
+        const locations = await Location.find({user_id: user_id});
 
         if (locations === 0){
             return res.status(402).json({message : "User not Found."})
@@ -47,7 +47,7 @@ const fetch_Location_byUserID = async (res, req) =>{
         res.status(500).json({error : "Internal Server Error. "})
     }
 };
-module.exports.fetch_Location_All = fetch_Location_All;
+module.exports.fetch_Location_byUserID = fetch_Location_byUserID;
 
 const update_location = async (req, res) =>{
     try{

@@ -10,7 +10,7 @@ module.exports.fetch_dust = async (req, res) => {
         return res.status(200).send(data)
     })
     .catch(err => {
-        return res.status(400).send(err)
+        return res.status(500).send(err)
     });
 };
 

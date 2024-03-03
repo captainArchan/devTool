@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// Author = Wichai Kommongkhun
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,

@@ -1,50 +1,53 @@
 const Location = require('../models/locationModel')
 
-const create_location = async (res, req) =>{
+// Author = Wichai Kommongkhun
+
+const create_location = async (req, res) =>{
     try{
-        const location_data = new Location(res.body);
+        const location_data = new Location(req.body);
+        console.log("Check Location Form:", location_data);
         const {address} = location_data ;
-        const locationExist = await User.findOne({address})
+        const locationExist = await Location.findOne({address})
 
         if (locationExist){
-            return res.status(400).json({message : "Location already exist."})
+            return res.json({message : "Location already exist."}).status(400);
         }
-
         const savedLocation = await location_data.save();
-        res.status(204).json(savedLocation);
+        res.json(savedLocation).status(201);
     }catch(error){
-        res.status(500).json({error : "Internal Server Error. "})
+        console.log(error);
+        res.json({error : "Internal Server Error. "}).status(500);
     }
 };
 module.exports.create_location = create_location;
 
-const fetch_Location_All = async (res, req) =>{
+const fetch_Location_All = async (req, res) =>{
     try{
         const locations = await Location.find();
-
+        
         if (locations === 0){
-            return res.status(402).json({message : "User not Found."})
+            return res.json({message : "User not Found."}).status(400);
         }
 
-        res.status(200).json(locations);
+        res.json(locations).status(200);
     }catch(error){
-        res.status(500).json({error : "Internal Server Error. "})
+        console.log(error);
+        res.json({error : "Internal Server Error. "}).status(500);
     }
 };
 module.exports.fetch_Location_All = fetch_Location_All;
 
-const fetch_Location_byUserID = async (res, req) =>{
+const fetch_Location_byUserID = async (req, res) =>{
     try{
         const user_id = req.params.user_id;
         const locations = await Location.find({user_id: user_id});
 
         if (locations === 0){
-            return res.status(402).json({message : "User not Found."})
+            return res.json({message : "User not Found."}).status(400);
         }
-
-        res.status(200).json(locations);
+        res.json(locations).status(200);
     }catch(error){
-        res.status(500).json({error : "Internal Server Error. "})
+        res.json({error : "Internal Server Error. "}).status(500);
     }
 };
 module.exports.fetch_Location_byUserID = fetch_Location_byUserID;
@@ -56,15 +59,15 @@ const update_location = async (req, res) =>{
         const locationExit = await Location.findById({_id: id});
 
         if (!locationExit){
-            return res.status(402).json({message : "Location not found."})
+            return res.json({message : "Location not found."}).status(400);
         }
 
         const locationUpdate = await Location.findByIdAndUpdate({_id: id}, update, {new: true});
-        res.status(201).json(locationUpdate);
+        res.json(locationUpdate).status(201);
 
     }catch(error){
         console.log(error);
-        res.status(500).json({error : "Internal Server Error. "})
+        res.json({error : "Internal Server Error. "}).status(500);
     }
 };
 
@@ -76,15 +79,15 @@ const delete_location = async (req, res) =>{
         const locationExist = await Location.findById({_id:id});
 
         if(!locationExist){
-            return res.status(402).json({message : " Location Not Found. "})
+            return res.json({message : " Location Not Found. "}).status(400);
         };
 
         await Location.findByIdAndDelete(id);
-        res.status(201).json({message : " Location deleted Successfully."});
+        res.json({message : " Location deleted Successfully."}).status(201);
 
     }catch(error){
         console.log(error);
-        res.status(500).json({error : "Internal Server Error. "})
+        res.json({error : "Internal Server Error. "}).status(500);
     }
 };
 module.exports.delete_location = delete_location;

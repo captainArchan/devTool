@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+// Author = Wichai Kommongkhun
+
 const locationSchema = new mongoose.Schema({
     user_id:{
         type: String,
@@ -9,11 +11,11 @@ const locationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Latitude: {
+    latitude: {
         type: Number,
         required: true
     },
-    Longitude: {
+    longitude: {
         type: Number,
         required: true
     }

@@ -1,7 +1,7 @@
 const express = require("express");
-const api = require('../models/getPM')
+const dust = require('../models/getPM')
 router = express.Router();
 
-router.get("/", api.getPM)
+router.get("/", dust.fetch_dust);
 
 exports.router = router;

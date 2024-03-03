@@ -2,6 +2,8 @@ const Location = require('../models/locationModel')
 
 // Author = Wichai Kommongkhun
 
+
+// User Pick up location for there's account
 const create_location = async (req, res) =>{
     try{
         const location_data = new Location(req.body);
@@ -12,6 +14,7 @@ const create_location = async (req, res) =>{
         if (locationExist){
             return res.json({message : "Location already exist."}).status(400);
         }
+
         const savedLocation = await location_data.save();
         res.json(savedLocation).status(201);
     }catch(error){
@@ -21,6 +24,8 @@ const create_location = async (req, res) =>{
 };
 module.exports.create_location = create_location;
 
+// Fetch_All location
+// No need any parameter
 const fetch_Location_All = async (req, res) =>{
     try{
         const locations = await Location.find();
@@ -37,6 +42,8 @@ const fetch_Location_All = async (req, res) =>{
 };
 module.exports.fetch_Location_All = fetch_Location_All;
 
+// Fetch_Location by user_id(user._id)
+// Need one parameter => user_id: String
 const fetch_Location_byUserID = async (req, res) =>{
     try{
         const user_id = req.params.user_id;
@@ -52,6 +59,10 @@ const fetch_Location_byUserID = async (req, res) =>{
 };
 module.exports.fetch_Location_byUserID = fetch_Location_byUserID;
 
+// Update one location 
+// Need one parameter and request body
+// params => location._id 
+// req.body => location.model all column in collection can't not null;
 const update_location = async (req, res) =>{
     try{
         const id = req.params.id;
@@ -70,9 +81,11 @@ const update_location = async (req, res) =>{
         res.json({error : "Internal Server Error. "}).status(500);
     }
 };
-
 module.exports.update_location = update_location;
 
+// Delete one location
+// Need one parameter => _id:String
+// location._id
 const delete_location = async (req, res) =>{
     try{
         const id = req.params.id;

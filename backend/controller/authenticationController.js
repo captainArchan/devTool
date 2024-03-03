@@ -12,6 +12,7 @@ const authentication = async (req, res) =>{
         const {username, password} = req.body;
         const user = await User.findOne({username: username});
 
+        // if have no username in collection return Badrequest
         if (!user){
             return res.json({message: "User not Found."}).status(400);
         }
@@ -25,6 +26,7 @@ const authentication = async (req, res) =>{
         }
 
         // jwt encode for session to client
+        // exp : 2 hour
         const token = jwt.sign({
             user_id: user._id,
             fullname: user.fullname

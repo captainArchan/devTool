@@ -8,6 +8,8 @@ const router = express.Router();
 router.get("/", locationController.fetch_Location_All);
 router.get("/:user_id", locationController.fetch_Location_byUserID);
 router.post("/", locationController.create_location);
+
+// They are Need authentication
 router.put("/:id", Authen.varifyToken ,locationController.update_location);
 router.delete("/:id", Authen.varifyToken,locationController.delete_location);
 

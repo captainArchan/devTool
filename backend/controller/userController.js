@@ -4,9 +4,15 @@ const bcrypt = require('bcrypt');
 
 // Author = Wichai Kommongkhun
 
+
+// Registeration for new user
+// need request body
+// user.model all column can't null value
 const createUser = async (req, res) => {
     try{
         console.log("CheckBODY: ",req.body);
+
+        // hash password before save in collection
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         req.body.password = hashedPassword;
 
@@ -14,6 +20,7 @@ const createUser = async (req, res) => {
         const {username} = user_data;
         const userExist = await User.findOne({username})
         
+        // username is unique column if username has exist return BadRequest
         if (userExist){
             return res.status(400).json({message : "User already exist."})
         }
@@ -28,6 +35,9 @@ const createUser = async (req, res) => {
 }; 
 module.exports.createUser = createUser;
 
+
+// fetch all user
+// No need parameter & request body
 const fetch_User_All = async (req, res) =>{
     try{
         const users = await User.find();
@@ -43,6 +53,9 @@ const fetch_User_All = async (req, res) =>{
 };
 module.exports.fetch_User_All = fetch_User_All;
 
+// fetch all user
+// Need one parameter _id: String
+// user._id
 const fetch_one_by_id = async (req, res) =>{
     try{
         const id = req.params.id;
@@ -60,7 +73,9 @@ const fetch_one_by_id = async (req, res) =>{
 };
 module.exports.fetch_one_by_id = fetch_one_by_id;
 
-// Registeration for new user
+// Update user infomation
+// need one parameter =>  _id: String and request body
+// user._id & user.model all column can't null value
 const update_user = async (req, res) =>{
     try{
         const id = req.params.id;
@@ -79,6 +94,9 @@ const update_user = async (req, res) =>{
 };
 module.exports.update_user = update_user;
 
+// Delete user account
+// Need one parameter _id: String
+// user._id
 const deleteUser = async (req, res)=>{
 
     try {
@@ -89,6 +107,7 @@ const deleteUser = async (req, res)=>{
         }
         await User.findByIdAndDelete(id);
         res.json({message : " User deleted Successfully."}).status(201);
+
     } catch (error) {
         console.log(error);
         res.json({error : " Internal Server Error. "}).status(500);

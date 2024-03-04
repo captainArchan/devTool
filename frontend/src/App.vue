@@ -8,19 +8,7 @@
         </div>
         <Sidebar v-if="!mobileView"/>
       </div>
-      <div id="circleContent">
-       <p id="locationName">
-        {{ locationName }}
-       </p>
-      </div>
-      <div id="defend">
-        <p>
-          แนวทางป้องกัน
-        </p>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem nesciunt magni esse laborum. Maiores, sed nesciunt cupiditate excepturi maxime unde placeat doloremque veritatis nisi minus! Sed neque soluta ipsum molestiae?
-        </p>
-      </div>
+
     </div>
   </div>
 </template>
@@ -33,7 +21,8 @@ export default {
     return {
       mobileView: true,
       showNav: false,
-      locationName: "ลาดกระบัง"
+      locationName: "ลาดกระบัง",
+      valueAir: 0,
     };
   },
   components: {
@@ -96,23 +85,6 @@ body {
   transform: translateX(300px);
 }
 
-#circleContent{
-  border-radius: 50%;
-  border: 5px solid red;
-  height: 250px;
-  width: 250px;
-  padding: 8px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#defend{
-  border-radius: 5px;
-  border: 5px solid red;
-}
 
 
 </style>

@@ -8,6 +8,7 @@
         </div>
         <Sidebar v-if="!mobileView"/>
       </div>
+      <Content/>
     </div>
   </div>
 </template>
@@ -15,6 +16,7 @@
 <script>
 import Sidebar from './components/Sidebar.vue';
 import SidebarMobile from './components/SidebarMobile.vue';
+import Content from './components/Content.vue';
 export default {
   data: () => {
     return {

@@ -5,7 +5,9 @@
     </div>
     <ul>
         <li class="icon"><font-awesome-icon icon="map" /></li>
-        <li class="button">เข้าสู่ระบบ</li>
+        <li class="button">
+            เข้าสู่ระบบ
+        </li>
     </ul>
   </div>
 </template>

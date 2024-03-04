@@ -2,7 +2,7 @@
   <div id="navigation-mobile">
     <ul>
       <li @click="showNav = false">FoonPM</li>
-      <li class="icon"><font-awesome-icon icon="map" /> ค้นหาสถานที่</li>
+      <li class="icon"><font-awesome-icon icon="map" />ค้นหาสถานที่</li>
       <li class="button">เข้าสู่ระบบ</li>
     </ul>
   </div>

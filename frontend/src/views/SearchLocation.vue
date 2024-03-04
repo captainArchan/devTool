@@ -17,14 +17,10 @@ export default {};
 </script>
 
 <style >
-.search {
-  border: 2px solid #D2E7F9;
-  border-radius: 5px;
-  border-radius: 5px;
-}
 
 .search input[type="text"] {
-  border: 0px;
+  border: 2px solid #D2E7F9;
+  border-radius: 5px;
   width: 67%;
   padding: 10px 10px;
 }

@@ -4,10 +4,12 @@
       <li>FoonPM</li>
     </div>
     <ul>
-      <li class="icon"><font-awesome-icon icon="map" /></li>
-      <router-link to="/login" class="button-link"
-        ><li class="button">Log In</li></router-link
-      >
+      <router-link to="/location" class="button-link">
+        <li class="icon"><font-awesome-icon icon="map" /></li>
+      </router-link>
+      <router-link to="/login" class="button-link">
+        <li class="button">Log In</li>
+    </router-link>
     </ul>
   </div>
 </template>

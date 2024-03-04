@@ -6,7 +6,7 @@
       <ul>
           <li class="icon"><font-awesome-icon icon="map" /></li>
           <li class="button">
-              <router-link to="/login">Home</router-link>
+              <router-link to="/login">เข้าสู่ระบบ</router-link>
           </li>
       </ul>
     </div>
@@ -59,4 +59,10 @@
       border-radius: 10px;
       padding: 10px;
   }
+  
+  @media only screen and (max-width: 990px) {
+
+}
+  
   </style>
+  

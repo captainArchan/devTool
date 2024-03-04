@@ -1,7 +1,4 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
+<!-- 
 <template>
   <div>
     <p>{{ locationName }}</p>
@@ -46,4 +43,4 @@ import TheWelcome from '../components/TheWelcome.vue'
   margin-block: 4%;
 }
 
-</style>
+</style> -->

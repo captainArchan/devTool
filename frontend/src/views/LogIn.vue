@@ -3,12 +3,12 @@
     <form>
       <h2 class="">Login</h2>
       <div class="input">
-        <label for="email">Email address</label>
+        <label>Username</label>
         <input
           class="form-control"
           type="text"
           name="email"
-          placeholder="email@adress.com"
+          placeholder="username"
         />
       </div>
       <div class="input">
@@ -17,11 +17,11 @@
           class="form-control"
           type="password"
           name="password"
-          placeholder="password123"
+          placeholder="password"
         />
       </div>
       <div class="">
-        You don't have an account? <span>Register</span>
+        You don't have an account? <router-link to="/register"><span>Register</span></router-link>
       </div>
       <button type="submit" id="login_button">
         Login
@@ -31,14 +31,8 @@
 </template>
 
 <script>
-import SidebarVue from "../components/Sidebar.vue";
 export default {
-  data() {
-    return {};
-  },
-  components: {
-    SidebarVue,
-  },
+
 };
 </script>
 
@@ -47,7 +41,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
 }
 
 form {
@@ -67,11 +61,6 @@ h2 {
   margin-bottom: 15px;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-}
-
 .form-control {
   width: 100%;
   padding: 10px;
@@ -81,7 +70,6 @@ label {
 }
 
 div {
-  text-align: center;
   margin-bottom: 15px;
 }
 

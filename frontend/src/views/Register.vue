@@ -9,6 +9,7 @@
             type="text"
             name="name"
             placeholder="name"
+            v-model="name"
           />
         </div>
         <div class="input">
@@ -18,6 +19,7 @@
             type="text"
             name="username"
             placeholder="username"
+            v-model="username"
           />
         </div>
         <div class="input">
@@ -27,6 +29,7 @@
             type="password"
             name="password"
             placeholder="password"
+            v-model="password"
           />
         </div>
         <div class="input">
@@ -36,6 +39,7 @@
             type="email"
             name="email"
             placeholder="email@example.com"
+            v-model="email"
           />
         </div>
         <div class="input">
@@ -45,6 +49,7 @@
             type="text"
             name="tel"
             placeholder="092-222-2222"
+            v-model="tel"
           />
         </div>
         <div class="input">
@@ -54,9 +59,10 @@
             type="text"
             name="address"
             placeholder="Ladkrabang Soi 13"
+            v-model="address"
           ></textarea>
         </div>
-        <button type="submit" id="login_button">
+        <button type="submit" id="login_button" @click="register()">
           Register
         </button>
       </form>
@@ -65,7 +71,16 @@
   
   <script>
   export default {
-  
+    data() {
+      return {
+        name:'',
+        username:'',
+        password:'',
+        email:'',
+        tel:'',
+        address:''
+      }
+    },
   };
   </script>
   

@@ -4,28 +4,16 @@
       <h2 class="">Login</h2>
       <div class="input">
         <label>Username</label>
-        <input
-          v-model="username"
-          class="form-control"
-          type="text"
-          name="email"
-          placeholder="username"
-        />
+        <input v-model="username" class="form-control" type="text" name="email" placeholder="username" />
       </div>
       <div class="input">
         <label for="password">Password</label>
-        <input
-          v-model="password"
-          class="form-control"
-          type="password"
-          name="password"
-          placeholder="password"
-        />
+        <input v-model="password" class="form-control" type="password" name="password" placeholder="password" />
       </div>
       <div class="">
         You don't have an account? <router-link to="/register"><span>Register</span></router-link>
       </div>
-      <button @click="asd()" id="login_button">
+      <button @click="submit()" id="login_button" type="button">
         Login
       </button>
     </form>
@@ -42,21 +30,19 @@ export default {
     };
   },
   methods: {
-    async asd() {
-      const {username, password} = this;
+    async submit() {
+      const { username, password } = this;
       console.log(username);
       await axios.post('http://localhost:3000/api/authen/login', {
         username, password
       })
-      .then(res => {
-        
-        window.location.href = 'http://localhost:5173/home'
-        // this.$router.push('home')
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+        .then(res => {
+          this.$router.push('home')
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
   }
 };
@@ -118,5 +104,4 @@ span {
 #login_button:hover {
   background-color: #0056b3;
 }
-
 </style>

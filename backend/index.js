@@ -31,7 +31,7 @@ const authentication_route = require("./routes/authenticationRoute");
 app.use("/api/user", user_route.router);
 app.use("/api/location", location_route.router);
 app.use("/api/dust", dust_route.router);
-app.use("/api/authen/", authentication_route.router);
+app.use("/api/authen", authentication_route.router);
 
 // connect mongodb
 mongoose.connect(MONGODB).then(() =>{

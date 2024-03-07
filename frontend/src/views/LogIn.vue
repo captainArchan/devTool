@@ -5,6 +5,7 @@
       <div class="input">
         <label>Username</label>
         <input
+          v-model="username"
           class="form-control"
           type="text"
           name="email"
@@ -14,6 +15,7 @@
       <div class="input">
         <label for="password">Password</label>
         <input
+          v-model="password"
           class="form-control"
           type="password"
           name="password"
@@ -23,7 +25,7 @@
       <div class="">
         You don't have an account? <router-link to="/register"><span>Register</span></router-link>
       </div>
-      <button type="submit" id="login_button">
+      <button @click="asd()" id="login_button">
         Login
       </button>
     </form>
@@ -31,8 +33,32 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-
+  data() {
+    return {
+      username: "",
+      password: ""
+    };
+  },
+  methods: {
+    async asd() {
+      const {username, password} = this;
+      console.log(username);
+      await axios.post('http://localhost:3000/api/authen/login', {
+        username, password
+      })
+      .then(res => {
+        
+        window.location.href = 'http://localhost:5173/home'
+        // this.$router.push('home')
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    }
+  }
 };
 </script>
 

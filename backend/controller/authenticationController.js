@@ -9,7 +9,11 @@ require("dotenv").config();
 // Login function
 const authentication = async (req, res) =>{
     try{
+        console.log(req.body)
         const {username, password} = req.body;
+        // const username = req.body.username;
+        // const password = req.body.password;
+        console.log(username);
         const user = await User.findOne({username: username});
 
         // if have no username in collection return Badrequest
@@ -31,8 +35,9 @@ const authentication = async (req, res) =>{
             user_id: user._id,
             fullname: user.fullname
         }, process.env.SECRETKEY, {expiresIn: "2h",  algorithm: "HS256"});
-
-        res.json({token: token}).status(200);
+        console.log(token)
+        console.log(user.email)
+        res.json({token: token, email: user.email}).status(200);
 
     }catch(error){
         console.log(error);

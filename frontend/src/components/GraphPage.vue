@@ -9,6 +9,7 @@ import Chart from 'chart.js/auto';
 // import { Colors } from 'chart.js';
 // import axios from 'axios';
 
+
 export default {
   data() {
     return {

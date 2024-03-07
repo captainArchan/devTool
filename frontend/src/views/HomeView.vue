@@ -29,11 +29,13 @@
         {{ defend }}
       </p>
     </div>
-
+    <GraphPageVue/>    
   </div>
 </template>
 
 <script>
+import GraphPageVue from '../components/GraphPage.vue';
+
     export default {
     // props: [
     //   information
@@ -44,6 +46,8 @@
         value: 15,
         defend: "งดกิจกรรมที่ทำนอกบ้าน ",
       }
+    },components: {
+      GraphPageVue
     },
     computed:{
       changeColor(){

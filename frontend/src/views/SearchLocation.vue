@@ -33,7 +33,8 @@ export default {
           search: "",
           province:'',
           amphur:'',
-          tambon:''
+          tambon:'',
+          dataa:[]
       }
   },
   computed: {
@@ -54,14 +55,23 @@ export default {
       }
   },
   methods: {
-    submit() {
+   async submit() {
   const { province, amphur, tambon } = this;
-  axios.get('http://localhost:3000/api/dust/filter', {
+  await axios.get('http://localhost:3000/api/dust/filter', {
     params: { province, amphur, tambon }
   })
   .then(response => {
     console.log(response.data);
-    //window.location.href = 'http://localhost:5173/home'
+    var dataObject = response.data.ans;
+    var locat = response.data.allLocation;
+
+    var dataString1 = JSON.stringify(locat);
+    var dataString = JSON.stringify(dataObject);
+
+    var queryString1 = 'data2=' + encodeURIComponent(dataString1);
+    var queryString = 'data=' + encodeURIComponent(dataString);
+
+    window.location.href = 'http://localhost:5173/home/?' + queryString + '&' + queryString1;;
   })
   .catch(error => {
     console.log(error);

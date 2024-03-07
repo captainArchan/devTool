@@ -34,44 +34,53 @@ module.exports.filter_dust = async (req, res) => {
     .then(response => {
         const data = response.data;
         // console.log(data.stations[0].areaTH);
-        let allLocation = []
+        const allLocation = []
         const ans = []
 
-        const aa = []
         for(i = 0;i <= data.stations.length -1;i++) {
+            //console.log(data[i].stations);
             if(data.stations[i].areaTH === check1 || data.stations[i].areaTH === check2){
                 ans.push(data.stations[i].AQILast)
+                allLocation.push(data.stations[i])
                 console.log('ss');
             }
             else{
-                //console.log(data.stations[i].areaTH.split(', ')[0].split(" ")[1]);
-                if (data.stations[i].areaTH.split(', ')[0].split(" ")[0] === 'ต.'+tambon){
+                //console.log('ต.'+tambon);
+                //console.log(data.stations[i].areaTH.split(', ')[0].split(" ")[0]);
+                if (data.stations[i].areaTH.split(', ')[0].split(" ")[0] === 'ต.'+tambon || data.stations[i].areaTH.split(', ')[0].split(" ")[0] === 'ต. '+tambon){
                     console.log("tam");
-                    ans.push(data.stations[i].AQILast)
-                    
+                    ans.push(data.stations[i].AQILast.areaTH)
+                    allLocation.push(data.stations[i])
                 }
-                else if (data.stations[i].areaTH.split(', ')[0].split(" ")[1] === 'อ.'+amphur){
+                else if (data.stations[i].areaTH.split(', ')[0].split(" ")[1] === 'อ.'+amphur || data.stations[i].areaTH.split(', ')[0].split(" ")[1] === 'อ. '+amphur){
                     ans.push(data.stations[i].AQILast)
+                    allLocation.push(data.stations[i].areaTH)
                     console.log("amp");
                 }
                 else if(data.stations[i].areaTH.split(', ')[1] === province){
                     ans.push(data.stations[i].AQILast)
+                    //console.log(data.stations[i].areaTH);
+                    allLocation.push(data.stations[i].areaTH)
                     console.log('province');
                 }
                 
             }
         
-            
         }
+        //const check2 = allLocation[0];
+        //console.log(ans[0]);
         if (ans.length > 1){
-          console.log("asd");
-          return res.status(200).send(ans[0])
+          console.log("log");
+          return res.status(200).json({ ans: ans[0], allLocation: allLocation });
         }
-        //console.log(ans)
+        else{
+            //console.log(ans[0])
         //console.log(aa);
-        return res.status(200).send(ans)
+        return res.status(200).json({ ans: ans[0], allLocation: allLocation });
+        }
     })
     .catch(err => {
+        console.log("err");
         return res.status(500).send(err)
     });
 }

@@ -35,16 +35,16 @@
 
 <script>
 import GraphPageVue from '../components/GraphPage.vue';
-
     export default {
     // props: [
     //   information
     // ],
     data(){
       return {
-        name: "ลาดกระบัง",
-        value: 15,
+        name: "",
+        value: 0,
         defend: "งดกิจกรรมที่ทำนอกบ้าน ",
+
       }
     },components: {
       GraphPageVue
@@ -66,6 +66,47 @@ import GraphPageVue from '../components/GraphPage.vue';
         }
       }
     },
+    async created(){
+
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const dataParam = urlParams.get('data');
+
+      const dataObject = JSON.parse(decodeURIComponent(dataParam));
+
+      const data2Param = urlParams.get('data2');
+
+      const data2Array = JSON.parse(decodeURIComponent(data2Param));
+
+      console.log(dataObject);
+      console.log(data2Array);
+
+
+      this.dataa = dataObject;
+      if (dataObject == null){
+        console.log("null");
+      }
+      this.value =await dataObject.PM25.value;
+      this.name = data2Array[0]
+
+      if(this.value<=50){
+          this.defend = 'สวมใส่หน้ากากอนามัยที่มีคุณภาพดีเพื่อป้องกันการสูดฝุ่น PM2.5 และสารพิษที่แนบมาด้วย ควรเรียนรู้เพิ่มเติมเกี่ยวกับฝุ่น PM2.5 และอุปกรณ์การป้องกันที่เหมาะสมง'
+        }else if(this.value<=100){
+          this.defend = 'คนไข้กลุ่มที่มีโรคประจำตัวควรพยายามหลีกเลี่ยงพื้นที่ที่มีฝุ่น PM2.5 สูงและป้องกันอาการระคายเคืองระบบทางเดินหายใจโดยการสวมหน้ากากอนามัย ควรติดตามข้อมูลเกี่ยวกับคุณภาพอากาศและฝุ่น PM2.5 ในพื้นที่ของตนเอง'
+        }else if(this.value<=150){
+          this.defend = 'คนไข้กลุ่มที่มีโรคประจำตัวควรหลีกเลี่ยงการออกนอกบ้านหากไม่จำเป็นและควรสวมหน้ากากอนามัยเมื่อต้องออกนอกบ้าน ควรจำกัดกิจกรรมกลางแจ้งที่มีระดับฝุ่น PM2.5 สูง'
+        }else if(this.value<=200){
+          this.defend = 'คนไข้กลุ่มที่มีโรคประจำตัวควรหลีกเลี่ยงการออกนอกบ้านที่มีฝุ่น PM2.5 สูงและควรสวมหน้ากากอนามัยเมื่อต้องออกนอกบ้าน ควรติดตามคำแนะนำจากหน่วยงานราชการหรือองค์กรท้องถิ่นเกี่ยวกับคุณภาพอากาศ'
+        }else if(this.value<=300){
+          this.defend = 'บุคคลทั่วไปควรหลีกเลี่ยงการออกนอกบ้านหากไม่จำเป็นและควรใส่หน้ากากอนามัยหากต้องออกนอกบ้าน ควรหลีกเลี่ยงการทำกิจกรรมกลางแจ้งที่ต้องสูดลมในสถานที่ที่มีฝุ่น PM2.5 สูง'
+        }else if(this.value>=301){
+          this.defend = 'ควรหลีกเลี่ยงการออกจากบ้านหากไม่จำเป็นและควรเฝ้าระวังอาการเจ็บป่วยที่เกี่ยวข้องกับอากาศในที่อยู่อย่างใกล้ชิด ควรติดตามคำแนะนำและคำเตือนจากหน่วยงานราชการหรือองค์กรท้องถิ่นเกี่ยวกับการป้องกันฝุ่น PM2.5 และคุณภาพอากาศในพื้นที่ของคุณ'
+        }
+
+
+
+
+    }
 
     
 

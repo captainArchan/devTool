@@ -17,7 +17,7 @@
       <p id="agi"><b>AGI</b></p>
     </div>
     <div id="divButtonMain">
-      <button type="submit" id="buttonMain">แจ้งเตือนไปยังอีเมลล์</button>
+      <button type="submit" id="buttonMain" @click="send_mail()">แจ้งเตือนไปยังอีเมลล์</button>
     </div>
 
 
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import GraphPageVue from '../components/GraphPage.vue';
     export default {
     // props: [
@@ -44,6 +45,8 @@ import GraphPageVue from '../components/GraphPage.vue';
         name: "",
         value: 0,
         defend: "งดกิจกรรมที่ทำนอกบ้าน ",
+        pm:[],
+        province:[]
 
       }
     },components: {
@@ -83,8 +86,18 @@ import GraphPageVue from '../components/GraphPage.vue';
 
 
       this.dataa = dataObject;
+      var randomNumber = Math.floor(Math.random() * 100)
+      console.log(randomNumber);
       if (dataObject == null){
-        console.log("null");
+        axios.get('http://localhost:3000/api/dust/page')
+        .then(res => {
+          //console.log(res.data.allLocation[randomNumber])
+          this.name = res.data.allLocation[randomNumber].areaTH;
+          this.value = res.data.allLocation[randomNumber].AQILast.PM25.value;
+        })
+        .catch(err => {
+          console.log(err);
+        })
       }
       this.value =await dataObject.PM25.value;
       this.name = data2Array[0]
@@ -103,10 +116,24 @@ import GraphPageVue from '../components/GraphPage.vue';
           this.defend = 'ควรหลีกเลี่ยงการออกจากบ้านหากไม่จำเป็นและควรเฝ้าระวังอาการเจ็บป่วยที่เกี่ยวข้องกับอากาศในที่อยู่อย่างใกล้ชิด ควรติดตามคำแนะนำและคำเตือนจากหน่วยงานราชการหรือองค์กรท้องถิ่นเกี่ยวกับการป้องกันฝุ่น PM2.5 และคุณภาพอากาศในพื้นที่ของคุณ'
         }
 
+        // await axios.get('http://localhost:3000/api/dust/graph')
+        // .then(respone => {
+        //   console.log(respone.data);
+        //   this.pm = respone.data.pm;
+        //   this.province = respone.data.province;
+        // })
+        // .catch(err => {
+        //   console.log(err);
+        // })
 
 
 
-    }
+    },
+    methods: {
+      send_mail(){
+
+      }
+    },
 
     
 

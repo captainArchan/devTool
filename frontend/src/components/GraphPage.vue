@@ -7,7 +7,7 @@
 <script>
 import Chart from 'chart.js/auto';
 // import { Colors } from 'chart.js';
-// import axios from 'axios';
+import axios from 'axios';
 
 
 export default {
@@ -88,7 +88,9 @@ export default {
         },
 
 
-      ]
+      ],
+      pm:[],
+      province:[]
     }
   },
   mounted() {
@@ -188,7 +190,19 @@ export default {
 
       return { data: filteredData, labels: dayLabels };
     }
-  }
+  },
+  async created() {
+    
+    await axios.get('http://localhost:3000/api/dust/graph')
+        .then(respone => {
+          console.log(respone.data);
+          this.pm = respone.data.pm;
+          this.province = respone.data.provi;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  },
 }
 
 </script>

@@ -14,6 +14,43 @@ module.exports.fetch_dust = async (req, res) => {
     });
 };
 
+module.exports.fetch_graph = async (req, res) => {
+    axios.get(APILink)
+    .then(response => {
+        const data = response.data;
+        const province = []
+        const pm25 = []
+        for(i = 0;i <= data.stations.length -1;i++){
+            pm25.push(data.stations[i].AQILast.PM25.value)
+            province.push(data.stations[i].areaTH)
+        }
+        return res.status(200).json({provi: province, pm: pm25})
+    })
+    .catch(err => {
+        return res.status(500).send(err)
+    });
+};
+
+
+module.exports.fetch_page = async (req, res) => {
+    axios.get(APILink)
+    .then(response => {
+        const data = response.data;
+        const allLocation = []
+        const ans = []
+        for(i = 0;i <= data.stations.length -1;i++){
+           ans.push(data.stations[i].AQILast.areaTH)
+           allLocation.push(data.stations[i])
+        }
+        console.log(allLocation);
+        return res.status(200).json({ ans: ans[0], allLocation: allLocation });
+    })
+    .catch(err => {
+        return res.status(500).send(err)
+    });
+};
+
+
 module.exports.filter_dust = async (req, res) => {
     // let location = `${req.body.tambon} ${req.body.amphure}, ${req.body.province}`;
     console.log(req.query);
@@ -21,7 +58,7 @@ module.exports.filter_dust = async (req, res) => {
     const amphur = req.query.amphur;
     const tambon  = req.query.tambon;
     const check = ''
-    if (province == 'กรุงเทพฯ'){
+    if (province === 'กรุงเทพฯ'){
        var  check1 = 'แขวง'+tambon+" "+amphur+", "+province;
        console.log("check1");
     }

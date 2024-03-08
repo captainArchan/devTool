@@ -21,7 +21,7 @@ module.exports.fetch_graph = async (req, res) => {
         const province = []
         const pm25 = []
         for(i = 0;i <= data.stations.length -1;i++){
-            pm25.push(data.stations[i].AQILast.PM25.value)
+            pm25.push(data.stations[i].AQILast.PM25.aqi)
             province.push(data.stations[i].areaTH)
         }
         return res.status(200).json({provi: province, pm: pm25})
@@ -104,8 +104,12 @@ module.exports.filter_dust = async (req, res) => {
             }
         
         }
-        //const check2 = allLocation[0];
-        //console.log(ans[0]);
+        console.log(allLocation);
+        console.log(ans[0]);
+        if (province === 'กรุงเทพฯ'){
+            console.log('bangkok');
+            return res.status(200).json({ ans: ans[0], allLocation: 'Bangkok' });
+        }
         if (ans.length > 1){
           console.log("log");
           return res.status(200).json({ ans: ans[0], allLocation: allLocation });

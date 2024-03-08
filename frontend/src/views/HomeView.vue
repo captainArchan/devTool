@@ -89,11 +89,12 @@ import GraphPageVue from '../components/GraphPage.vue';
       var randomNumber = Math.floor(Math.random() * 100)
       console.log(randomNumber);
       if (dataObject == null){
-        axios.get('http://localhost:3000/api/dust/page')
+        await axios.get('http://localhost:3000/api/dust/page')
         .then(res => {
           //console.log(res.data.allLocation[randomNumber])
           this.name = res.data.allLocation[randomNumber].areaTH;
-          this.value = res.data.allLocation[randomNumber].AQILast.PM25.value;
+
+          this.value = res.data.allLocation[randomNumber].AQILast.PM25.aqi;
         })
         .catch(err => {
           console.log(err);
@@ -101,7 +102,9 @@ import GraphPageVue from '../components/GraphPage.vue';
       }
       this.value =await dataObject.PM25.value;
       this.name = data2Array[0]
-
+      if(this.name == 'B'){
+            this.name = 'กรุงเทพฯ'
+          }
       if(this.value<=50){
           this.defend = 'สวมใส่หน้ากากอนามัยที่มีคุณภาพดีเพื่อป้องกันการสูดฝุ่น PM2.5 และสารพิษที่แนบมาด้วย ควรเรียนรู้เพิ่มเติมเกี่ยวกับฝุ่น PM2.5 และอุปกรณ์การป้องกันที่เหมาะสมง'
         }else if(this.value<=100){

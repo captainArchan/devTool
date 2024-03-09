@@ -59,7 +59,7 @@ pipeline {
                     // Pull the Docker image from Docker Hub
                     sh 'docker pull $DOCKER_IMAGE'
                     // Run the Docker container
-                    sh 'docker run -d --name foon-server-api -p 3000:300 $DOCKER_IMAGE'
+                    sh 'docker run -d --name foon-server-api -p 3000:3000 $DOCKER_IMAGE'
                 }
             }
         }

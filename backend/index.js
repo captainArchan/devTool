@@ -31,12 +31,10 @@ const sendmail_route =  require("./routes/sendemailRoute");
 app.use("/api/user", user_route.router);
 app.use("/api/location", location_route.router);
 app.use("/api/dust", dust_route.router);
-<<<<<<< HEAD
 app.use("/api/authen/", authentication_route.router);
 app.use("/api/sendmail", sendmail_route.router);
-=======
+
 app.use("/api/authen", authentication_route.router);
->>>>>>> main
 
 // connect mongodb
 mongoose.connect(MONGODB).then(() =>{

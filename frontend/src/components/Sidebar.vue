@@ -1,21 +1,44 @@
 <template>
   <div id="navigation">
     <div class="logo">
-      <li>FoonPM</li>
+      <router-link to="/home" class="button-link">
+          <li >FoonPM</li>
+      </router-link>
     </div>
     <ul>
       <router-link to="/location" class="button-link">
-        <li class="icon"><font-awesome-icon icon="map" /></li>
+        <li class="icon"><font-awesome-icon icon="map"/></li>
       </router-link>
-      <router-link to="/login" class="button-link">
+      <router-link to="/login" class="button-link" v-if="email != ' '">
+        <li class="button" @click="reset()">Logout</li>
+    </router-link>
+    <router-link to="/login" class="button-link" v-else>
         <li class="button">Log In</li>
     </router-link>
+
     </ul>
   </div>
 </template>
   
   <script>
-export default {};
+export default {
+  data() {
+    return {
+      email:''
+    }
+  },
+  created() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+      const dataParam = urlParams.get('data');
+      this.email = urlParams.get('email')
+  },
+  methods: {
+    reset(){
+      this.email = ''
+    }
+  },
+};
 </script>
   
   <style scoped>

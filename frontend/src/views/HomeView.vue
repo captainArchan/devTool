@@ -46,7 +46,8 @@ import GraphPageVue from '../components/GraphPage.vue';
         value: 0,
         defend: "งดกิจกรรมที่ทำนอกบ้าน ",
         pm:[],
-        province:[]
+        province:[],
+        email:''
 
       }
     },components: {
@@ -74,6 +75,8 @@ import GraphPageVue from '../components/GraphPage.vue';
       const urlParams = new URLSearchParams(window.location.search);
 
       const dataParam = urlParams.get('data');
+      this.email = urlParams.get('email')
+
 
       const dataObject = JSON.parse(decodeURIComponent(dataParam));
 
@@ -88,6 +91,7 @@ import GraphPageVue from '../components/GraphPage.vue';
       this.dataa = dataObject;
       var randomNumber = Math.floor(Math.random() * 100)
       console.log(randomNumber);
+
       if (dataObject == null){
         await axios.get('http://localhost:3000/api/dust/page')
         .then(res => {
@@ -134,7 +138,8 @@ import GraphPageVue from '../components/GraphPage.vue';
     },
     methods: {
       send_mail(){
-
+          console.log(this.email);
+          axios.post('http://localhost:3000/api/sendmail',{email:this.email});
       }
     },
 

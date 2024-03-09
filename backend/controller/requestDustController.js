@@ -83,7 +83,7 @@ module.exports.filter_dust = async (req, res) => {
             }
             else{
                 //console.log('ต.'+tambon);
-                //console.log(data.stations[i].areaTH.split(', ')[0].split(" ")[0]);
+                //console.log(data.stations[i].areaTH.split(', ')[0].split(" ")[1]);
                 if (data.stations[i].areaTH.split(', ')[0].split(" ")[0] === 'ต.'+tambon || data.stations[i].areaTH.split(', ')[0].split(" ")[0] === 'ต. '+tambon){
                     console.log("tam");
                     ans.push(data.stations[i].AQILast.areaTH)

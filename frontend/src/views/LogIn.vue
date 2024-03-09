@@ -37,7 +37,9 @@ export default {
         username, password
       })
         .then(res => {
-          this.$router.push('home')
+          console.log(res.data.email);
+          window.location.href = 'http://localhost:5173/home/?email='+res.data.email
+          // this.$router.push('home')
           console.log(res.data);
         })
         .catch(error => {

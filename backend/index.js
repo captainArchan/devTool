@@ -26,11 +26,14 @@ const user_route = require("./routes/userRoute");
 const dust_route = require("./routes/dustRoute");
 const location_route = require("./routes/locationRoute");
 const authentication_route = require("./routes/authenticationRoute");
-
+const sendmail_route =  require("./routes/sendemailRoute");
 // use router
 app.use("/api/user", user_route.router);
 app.use("/api/location", location_route.router);
 app.use("/api/dust", dust_route.router);
+app.use("/api/authen/", authentication_route.router);
+app.use("/api/sendmail", sendmail_route.router);
+
 app.use("/api/authen", authentication_route.router);
 
 // connect mongodb

@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+const _env = import.meta.env;
 export default {
   data() {
     return {
@@ -33,12 +34,12 @@ export default {
     async submit() {
       const { username, password } = this;
       console.log(username);
-      await axios.post('http://localhost:3000/api/authen/login', {
+      await axios.post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/authen/login`, {
         username, password
       })
         .then(res => {
           console.log(res.data.email);
-          window.location.href = 'http://localhost:5173/home/?email='+res.data.email
+          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/?email=`+res.data.email;
           // this.$router.push('home')
           console.log(res.data);
         })

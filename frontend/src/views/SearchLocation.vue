@@ -24,6 +24,7 @@ import thai_amphures from '../assets/thai_amphures.json'
 import thai_provinces from '../assets/thai_provinces.json'
 import thai_tambons from '../assets/thai_tambons.json'
 import axios from 'axios';
+const _env = import.meta.env;
 export default {
   data() {
       return{
@@ -57,7 +58,7 @@ export default {
   methods: {
    async submit() {
   const { province, amphur, tambon } = this;
-  await axios.get('http://localhost:3000/api/dust/filter', {
+  await axios.get(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/dust/filter`, {
     params: { province, amphur, tambon }
   })
   .then(response => {
@@ -71,7 +72,7 @@ export default {
     var queryString1 = 'data2=' + encodeURIComponent(dataString1);
     var queryString = 'data=' + encodeURIComponent(dataString);
 
-    window.location.href = 'http://localhost:5173/home/?' + queryString + '&' + queryString1;;
+    window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/?` + queryString + '&' + queryString1;;
   })
   .catch(error => {
     console.log(error);

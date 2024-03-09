@@ -33,7 +33,6 @@ app.use("/api/location", location_route.router);
 app.use("/api/dust", dust_route.router);
 app.use("/api/authen/", authentication_route.router);
 app.use("/api/sendmail", sendmail_route.router);
-
 app.use("/api/authen", authentication_route.router);
 
 // connect mongodb

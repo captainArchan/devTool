@@ -4,125 +4,104 @@
       <h2 class="">Register</h2>
       <div class="input">
         <label>Name</label>
-        <input
-          v-model="name"
-          class="form-control"
-          type="text"
-          name="name"
-          placeholder="name"
-        />
+        <input v-model="name" class="form-control" type="text" name="name" placeholder="name" />
       </div>
+
       <div class="input">
         <label>Username</label>
-        <input
-          v-model="username"
-          class="form-control"
-          type="text"
-          name="username"
-          placeholder="username"
-        />
+        <input v-model="username" class="form-control" type="text" name="username" placeholder="username" />
       </div>
+
       <div class="input">
         <label for="password">Password</label>
-        <input
-          v-model="password"
-          class="form-control"
-          type="password"
-          name="password"
-          placeholder="password"
-        />
+        <input v-model="password" class="form-control" type="password" name="password" placeholder="password" />
       </div>
+
       <div class="input">
         <label>Email</label>
-        <input
-          v-model="email"
-          class="form-control"
-          type="email"
-          name="email"
-          placeholder="email@example.com"
-        />
+        <input v-model="email" class="form-control" type="email" name="email" placeholder="email@example.com" />
       </div>
+
       <div class="input">
         <label>Tel</label>
-        <input
-          v-model="tel"
-          class="form-control"
-          type="text"
-          name="tel"
-          placeholder="092-222-2222"
-        />
+        <input v-model="tel" class="form-control" type="text" name="tel" placeholder="092-222-2222" />
       </div>
+
       <div>
-        <select v-model="province">
-          <option value="">เลือกจังหวัด</option>
-          <option
-            v-for="province in filterListProvinces"
-            v-bind:key="province.id"
-            :value="province.name_th"
-          >
-            {{ province.name_th }}
-          </option>
-        </select>
+        <label for=""> จังหวัด
+          <select v-model="province_selected">
+            <option :value="{ province_name: '', provice_id: -1 }" selected>เลือกจังหวัด</option>
+            <option v-for="province in filterListProvinces" v-bind:key="province.id"
+              :value="{ province_name: province.name_th, provice_id: province.id }">
+              {{ province.name_th }}
+            </option>
+          </select>
+        </label>
+
       </div>
+
       <div>
-        <select v-model="tambon">
-          <option value="">เลือกแขวง/ตำบล</option>
-          <option
-            v-for="tambon in filterListTambon"
-            v-bind:key="tambon.id"
-            :value="tambon.name_th"
-          >
-            {{ tambon.name_th }}
-          </option>
-        </select>
+        <label for="">เลือกเขต/อำเภอ
+          <select v-model="amphure_selected">
+            <option :value="{ name_th: '', amphur_id: -1 }">เลือกเขต/อำเภอ</option>
+            <option v-for="amphur in filterListAmphures" v-bind:key="amphur.id" 
+            :value="{ name_th: amphur.name_th, amphur_id: amphur.id }">
+              {{ amphur.name_th }}
+            </option>
+          </select>
+        </label>
+
       </div>
+
       <div>
-      <select v-model="amphur">
-        <option value="">เลือกเขต/อำเภอ</option>
-        <option
-          v-for="amphur in filterListAmphures"
-          v-bind:key="amphur.id"
-          :value="amphur.name_th"
-        >
-          {{ amphur.name_th }}
-        </option>
-      </select>
+        <label for="">เลือกแขวง/ตำบล
+          <select v-model="tambon_selected">
+            <option :value="{ name_th: '', tambon_id: -1, zip_code: -1}">เลือกแขวง/ตำบล</option>
+            <option v-for="tambon in filterListTambon" v-bind:key="tambon.id" 
+            :value="{ name_th: tambon.name_th, tambon_id:tambon.id, zip_code: tambon.zip_code }">
+              {{ tambon.name_th }}
+            </option>
+          </select>
+        </label>
       </div>
+
+      <div class="">
+        <label>zip_code
+          <input v-model="zip_code" type="text" name="username" disabled />
+        </label>
+      </div>
+
       <div class="input">
         <label>Address</label>
-        <textarea
-          class="form-control"
-          type="text"
-          name="address"
-          placeholder="Ladkrabang Soi 13"
-        ></textarea>
+        <textarea class="form-control" type="text" name="address" placeholder="Ladkrabang Soi 13"></textarea>
       </div>
-      <button type="submit" id="login_button" @click="register()"></button>
 
+      <button type="submit" id="login_button" @click="register()"></button>
       <button type="button" @click="submit()" id="login_button">
         Register
       </button>
     </form>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import thai_amphures from '../assets/thai_amphures.json'
 import thai_provinces from '../assets/thai_provinces.json'
 import thai_tambons from '../assets/thai_tambons.json'
 import axios from "axios";
+
 export default {
   data() {
     return {
       list_amphures: thai_amphures,
       list_provinces: thai_provinces,
       list_tambons: thai_tambons,
-      province_id: "",
-      tambon_id: "",
-      amphure_id: "",
-      province:'',
-      amphur:'',
-      tambon:'',
+      province_selected: { province_name: '', provice_id: -1 },
+      amphure_selected: { name_th: '', amphur_id: -1 },
+      tambon_selected: { name_th: '', tambon_id: -1, zip_code: -1 },
+      province: '',
+      amphur: '',
+      tambon: '',
       name: "",
       username: "",
       password: "",
@@ -133,24 +112,43 @@ export default {
     };
   },
   computed: {
-      filterListAmphures() {
-          return this.list_amphures.filter((amphur) => {
-              return amphur.name_th.toLowerCase()
-          })
-      },
-      filterListProvinces() {
-          return this.list_provinces.filter((province) => {
-              return province.name_th.toLowerCase()
-          })
-      },
-      filterListTambon() {
-          return this.list_tambons.filter((tambon) => {
-              return tambon.name_th.toLowerCase()
-          })
-      }
+    filterListAmphures() {
+      return this.list_amphures.filter((amphur) => {
+        return amphur.name_th.toLowerCase()
+      })
+    },
+    filterListProvinces() {
+      return this.list_provinces.filter((province) => {
+        return province.name_th.toLowerCase()
+      })
+    },
+    filterListTambon() {
+      return this.list_tambons.filter((tambon) => {
+        return tambon.name_th.toLowerCase()
+      })
+    }
   },
   watch: {
-      
+    province_selected(province) {
+      this.province = province.province_name;
+      if (province.provice_id == -1) {
+       this.list_amphures = thai_amphures;
+      } else {
+        this.list_amphures = this.list_amphures.filter((item) => item.province_id == province.provice_id)
+      }
+    },
+    amphure_selected(amphur){
+      this.amphur = amphur.name_th;
+      if (amphur.amphur_id == -1){
+        this.list_tambons = thai_tambons;
+      }else{
+        this.list_tambons = this.list_tambons.filter((item) => item.amphure_id == amphur.amphur_id)
+      }
+    },
+    tambon_selected(tambon){
+      this.tambon = tambon.name_th;
+      this.zip_code = tambon.zip_code;
+    }
   },
   methods: {
     submit() {
@@ -170,8 +168,8 @@ export default {
   },
 };
 </script>
-  
-  <style>
+
+<style>
 .container {
   display: flex;
   justify-content: center;

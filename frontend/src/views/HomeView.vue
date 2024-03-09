@@ -143,8 +143,6 @@ import GraphPageVue from '../components/GraphPage.vue';
       }
     },
 
-    
-
   }
 </script>
 

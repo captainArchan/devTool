@@ -2,13 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors');
-const bodyParser  = require('body-Parser')
+// const bodyParser  = require('body-Parser')
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.urlencoded({extended: false}));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+
+
 const { PORT, MONGODB } = process.env;
 
 const logger = () =>

@@ -61,7 +61,7 @@ pipeline {
                     // Pull the Docker image from Docker Hub
                     sh 'docker pull $DOCKER_IMAGE'
                     // Run the Docker container
-                    sh 'docker run -d --name client-app -p 8085:8085 $DOCKER_IMAGE'
+                    sh 'docker run -d --name client-app -p 8088:5173 $DOCKER_IMAGE'
                 }
             }
         }

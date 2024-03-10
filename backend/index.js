@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: false}));
 // app.use(bodyParser.urlencoded({ extended: false }));
 
 
-const { PORT, MONGODB } = process.env;
-
+// const { PORT, MONGODB } = process.env;
+// 
 const logger = () =>
 (req, res, next) => { 
   const timestamp = new Date().toISOString(); 
@@ -39,9 +39,11 @@ app.use("/api/sendmail", sendmail_route.router);
 app.use("/api/authen", authentication_route.router);
 
 // connect mongodb
+
+const MONGODB = "mongodb+srv://admin:TZvenduL0uqJbEX2@wichai.tbjf9ai.mongodb.net/FoonPM_database?retryWrites=true&w=majority&appName=Wichai"
 mongoose.connect(MONGODB).then(() =>{
     console.log("Database connected Successfully.");
     app.listen(PORT, ()=>{
-        console.log(`Server is running on port : ${PORT}`);
+        console.log(`Server is running on port : 3000`);
     });
 }).catch(error => console.log(error));

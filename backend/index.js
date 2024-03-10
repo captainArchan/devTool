@@ -43,7 +43,7 @@ app.use("/api/authen", authentication_route.router);
 const MONGODB = "mongodb+srv://admin:TZvenduL0uqJbEX2@wichai.tbjf9ai.mongodb.net/FoonPM_database?retryWrites=true&w=majority&appName=Wichai"
 mongoose.connect(MONGODB).then(() =>{
     console.log("Database connected Successfully.");
-    app.listen(PORT, ()=>{
+    app.listen(3000, ()=>{
         console.log(`Server is running on port : 3000`);
     });
 }).catch(error => console.log(error));

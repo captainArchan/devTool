@@ -39,6 +39,7 @@ bower_components
 build/Release
 
 # Dependency directories
+
 node_modules/
 jspm_packages/
 
@@ -124,8 +125,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
-
 .package-lock.env
 .package-lock.json
-.env

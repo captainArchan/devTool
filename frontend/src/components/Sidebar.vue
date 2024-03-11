@@ -9,7 +9,7 @@
       <router-link to="/location" class="button-link">
         <li class="icon"><font-awesome-icon icon="map"/></li>
       </router-link>
-      <router-link to="/login" class="button-link" v-if="email != ' '">
+      <router-link to="/login" class="button-link" v-if="token != null">
         <li class="button" @click="reset()">Logout</li>
     </router-link>
     <router-link to="/login" class="button-link" v-else>
@@ -24,18 +24,20 @@
 export default {
   data() {
     return {
-      email:''
+      // email:''
+      token: ''
     }
   },
   created() {
-    const urlParams = new URLSearchParams(window.location.search);
+    // const urlParams = new URLSearchParams(window.location.search);
 
-      const dataParam = urlParams.get('data');
-      this.email = urlParams.get('email')
+    //   const dataParam = urlParams.get('data');
+    this.token = localStorage.getItem('Token')
   },
   methods: {
     reset(){
-      this.email = ''
+      localStorage.removeItem("Token");
+      window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/login`
     }
   },
 };

@@ -39,7 +39,10 @@ export default {
       })
         .then(res => {
           console.log(res.data.email);
-          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/?email=`+res.data.email;
+          console.log(res.data.token)
+          localStorage.setItem("Token", res.data.token);
+          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/`;
+          
           // this.$router.push('home')
           console.log(res.data);
         })

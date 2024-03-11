@@ -41,7 +41,7 @@ export default {
           console.log(res.data.email);
           console.log(res.data.token)
           localStorage.setItem("Token", res.data.token);
-          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/`;
+          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home`;
           
           // this.$router.push('home')
           console.log(res.data);

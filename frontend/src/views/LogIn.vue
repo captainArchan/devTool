@@ -40,6 +40,7 @@ export default {
       })
         .then(res => {
           if(res.status == 200) {
+            console.log(res.status)
             console.log(res.data.email);
             console.log(res.data.token)
             localStorage.setItem("Token", res.data.token);

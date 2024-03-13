@@ -39,11 +39,18 @@ export default {
         username, password
       })
         .then(res => {
-          console.log(res.data.email);
-          console.log(res.data.token)
-          localStorage.setItem("Token", res.data.token);
-          localStorage.setItem("email", res.data.email);
-          window.location.href = `http://34.125.201.146:8088/home`;
+          if(res.data.token != null) {
+            console.log(res.status)
+            console.log(res.data.email);
+            console.log(res.data.token)
+            localStorage.setItem("Token", res.data.token);
+            localStorage.setItem("email", res.data.email);
+            window.location.href = `http://34.125.201.146:8088/home`;
+          }
+          else {
+            alert("Wrong Username or Password");
+          }
+          
           
           // this.$router.push('home')
           console.log(res.data);

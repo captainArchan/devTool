@@ -17,7 +17,7 @@
       <p id="agi"><b>AGI</b></p>
     </div>
     <div id="divButtonMain">
-      <button type="submit" id="buttonMain" @click="send_mail()">แจ้งเตือนไปยังอีเมลล์</button>
+      <button type="button" id="buttonMain" @click="send_mail()">แจ้งเตือนไปยังอีเมลล์</button>
     </div>
 
 

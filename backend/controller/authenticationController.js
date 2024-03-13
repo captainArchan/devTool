@@ -34,7 +34,8 @@ const authentication = async (req, res) =>{
         const token = jwt.sign({
             user_id: user._id,
             fullname: user.fullname
-        }, process.env.SECRETKEY, {expiresIn: "2h",  algorithm: "HS256"});
+        }, '9jn3ooAdnmg33f00apijns12', {expiresIn: "2h",  algorithm: "HS256"});
+
         console.log(token)
         console.log(user.email)
         res.json({token: token, email: user.email}).status(200);

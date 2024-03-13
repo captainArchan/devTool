@@ -77,7 +77,7 @@
       </div>
 
 
-      <button type="button" @click="submit()" id="login_button">
+      <button type="submit" @click="submit()" id="login_button">
         Register
       </button>
     </form>

@@ -17,7 +17,7 @@
       <p id="agi"><b>AGI</b></p>
     </div>
     <div id="divButtonMain">
-      <button type="submit" id="buttonMain" @click="send_mail()">แจ้งเตือนไปยังอีเมลล์</button>
+      <button type="button" id="buttonMain" @click="send_mail()">แจ้งเตือนไปยังอีเมลล์</button>
     </div>
 
 
@@ -48,7 +48,8 @@ import GraphPageVue from '../components/GraphPage.vue';
         defend: "งดกิจกรรมที่ทำนอกบ้าน ",
         pm:[],
         province:[],
-        email:''
+        email:'',
+        check: []
 
       }
     },components: {
@@ -76,7 +77,7 @@ import GraphPageVue from '../components/GraphPage.vue';
       const urlParams = new URLSearchParams(window.location.search);
 
       const dataParam = urlParams.get('data');
-      this.email = urlParams.get('email')
+      this.email = localStorage.getItem('email')
 
 
       const dataObject = JSON.parse(decodeURIComponent(dataParam));
@@ -85,32 +86,40 @@ import GraphPageVue from '../components/GraphPage.vue';
 
       const data2Array = JSON.parse(decodeURIComponent(data2Param));
 
-      console.log(dataObject);
-      console.log(data2Array);
-
-
       this.dataa = dataObject;
       var randomNumber = Math.floor(Math.random() * 100)
-      console.log(randomNumber);
-      console.log(_env.VITE_APP_HOST);
+
+      await axios.get('http://34.16.184.217:3000/api/dust/graph')
+        .then(respone => {
+          // console.log(respone.data);
+          this.pm = respone.data.pm;
+          this.province = respone.data.province;
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
       if (dataObject == null){
-        await axios.get(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/dust/page`)
+        await axios.get(`http://34.16.184.217:3000/api/dust/page`)
         .then(res => {
-          //console.log(res.data.allLocation[randomNumber])
+          // console.log(res.data.allLocation[randomNumber].AQILast)
+          this.check = res.data.allLocation[randomNumber];
+          console.log(this.check.AQILast.PM25.aqi);
           this.name = res.data.allLocation[randomNumber].areaTH;
-
-          this.value = res.data.allLocation[randomNumber].AQILast.PM25.aqi;
+          this.value = this.check.AQILast.PM25.aqi;
         })
         .catch(err => {
           console.log(err);
         })
+      }else{
+        this.value =await dataObject.PM25.value;
+       this.name = data2Array[0]
       }
-      this.value =await dataObject.PM25.value;
-      this.name = data2Array[0]
+
       if(this.name == 'B'){
             this.name = 'กรุงเทพฯ'
           }
+
       if(this.value<=50){
           this.defend = 'สวมใส่หน้ากากอนามัยที่มีคุณภาพดีเพื่อป้องกันการสูดฝุ่น PM2.5 และสารพิษที่แนบมาด้วย ควรเรียนรู้เพิ่มเติมเกี่ยวกับฝุ่น PM2.5 และอุปกรณ์การป้องกันที่เหมาะสมง'
         }else if(this.value<=100){
@@ -125,21 +134,11 @@ import GraphPageVue from '../components/GraphPage.vue';
           this.defend = 'ควรหลีกเลี่ยงการออกจากบ้านหากไม่จำเป็นและควรเฝ้าระวังอาการเจ็บป่วยที่เกี่ยวข้องกับอากาศในที่อยู่อย่างใกล้ชิด ควรติดตามคำแนะนำและคำเตือนจากหน่วยงานราชการหรือองค์กรท้องถิ่นเกี่ยวกับการป้องกันฝุ่น PM2.5 และคุณภาพอากาศในพื้นที่ของคุณ'
         }
 
-        // await axios.get('http://localhost:3000/api/dust/graph')
-        // .then(respone => {
-        //   console.log(respone.data);
-        //   this.pm = respone.data.pm;
-        //   this.province = respone.data.province;
-        // })
-        // .catch(err => {
-        //   console.log(err);
-        // })
-
     },
     methods: {
       send_mail(){
           console.log(this.email);
-          axios.post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/sendmail`,{email:this.email});
+          axios.post(`http://34.16.184.217:3000/api/sendmail`,{email:this.email});
       }
     },
 

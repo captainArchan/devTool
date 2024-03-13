@@ -155,7 +155,7 @@ export default {
       console.log("Success");
       const { name, username, password, email, tel, address } = this;
       axios
-        .post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/user/`, {
+        .post(`http://34.16.184.217:3000/api/user/`, {
           body: { name, username, password, email, tel, address },
         })
         .then((res) => {

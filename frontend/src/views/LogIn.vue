@@ -34,14 +34,20 @@ export default {
     async submit() {
       const { username, password } = this;
       console.log(username);
-      await axios.post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/authen/login`, {
+      console.log(`http://34.16.184.217:3000/api/authen/login`);
+      await axios.post(`http://34.16.184.217:3000/api/authen/login`, {
         username, password
       })
         .then(res => {
           console.log(res.data.email);
-          window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/?email=`+res.data.email;
+          console.log(res.data.token)
+          localStorage.setItem("Token", res.data.token);
+          localStorage.setItem("email", res.data.email);
+          window.location.href = `http://34.125.201.146:8088/home`;
+          
           // this.$router.push('home')
           console.log(res.data);
+
         })
         .catch(error => {
           console.log(error);

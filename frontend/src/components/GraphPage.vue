@@ -13,6 +13,7 @@
 import Chart from 'chart.js/auto';
 import axios from 'axios';
 import moment from 'moment';
+const _env = import.meta.env;
 export default {
   data() {
     return {
@@ -38,7 +39,7 @@ export default {
       return currentDate.toDateString();
     },
     async renderChart() {
-      await axios.get('http://localhost:3000/api/dust/graph')
+      await axios.get(`http://34.16.184.217:3000/api/dust/graph`)
         .then(response => {
           console.log(response.data);
           this.pm = response.data.pm;

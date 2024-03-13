@@ -39,7 +39,7 @@ export default {
         username, password
       })
         .then(res => {
-          if(res.status == 200) {
+          if(res.data.token != null) {
             console.log(res.status)
             console.log(res.data.email);
             console.log(res.data.token)

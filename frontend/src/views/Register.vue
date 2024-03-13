@@ -151,13 +151,23 @@ export default {
     }
   },
   methods: {
-    submit() {
+   async submit() {
       console.log("Success");
-      const { name, username, password, email, tel, address } = this;
-      axios
-        .post(`http://34.16.184.217:3000/api/user/`, {
-          body: { name, username, password, email, tel, address },
-        })
+      const data = {
+        username: this.username,
+        phone: this.tel,
+        email: this.email,
+        fullname: this.name,
+        password: this.password,
+        amphur: this.amphur,
+        tumbon: this.tambon,
+        province: this.province,
+        address: this.address,
+        zip_code: this.zip_code
+      }
+
+     await axios
+        .post(`http://34.16.184.217:3000/api/user/`, data)
         .then((res) => {
           console.log(res.data);
         })

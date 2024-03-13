@@ -76,8 +76,8 @@
         <textarea class="form-control" type="text" name="address" placeholder="Ladkrabang Soi 13"></textarea>
       </div>
 
-      <button type="submit" id="login_button" @click="register()"></button>
-      <button type="button" @click="submit()" id="login_button">
+
+      <button type="submit" @click="submit()" id="login_button">
         Register
       </button>
     </form>

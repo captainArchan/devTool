@@ -58,7 +58,7 @@ export default {
   methods: {
    async submit() {
   const { province, amphur, tambon } = this;
-  await axios.get(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/dust/filter`, {
+  await axios.get(`http://34.16.184.217:3000/api/dust/filter`, {
     params: { province, amphur, tambon }
   })
   .then(response => {
@@ -72,7 +72,7 @@ export default {
     var queryString1 = 'data2=' + encodeURIComponent(dataString1);
     var queryString = 'data=' + encodeURIComponent(dataString);
 
-    window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/home/?` + queryString + '&' + queryString1;;
+    window.location.href = `http://34.125.201.146:8088/home/?` + queryString + '&' + queryString1;;
   })
   .catch(error => {
     console.log(error);

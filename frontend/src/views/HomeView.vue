@@ -95,7 +95,7 @@ import GraphPageVue from '../components/GraphPage.vue';
       console.log(_env.VITE_APP_HOST);
 
       if (dataObject == null){
-        await axios.get(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/dust/page`)
+        await axios.get(`http://34.16.184.217:3000/api/dust/page`)
         .then(res => {
           //console.log(res.data.allLocation[randomNumber])
           this.name = res.data.allLocation[randomNumber].areaTH;
@@ -139,7 +139,7 @@ import GraphPageVue from '../components/GraphPage.vue';
     methods: {
       send_mail(){
           console.log(this.email);
-          axios.post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/sendmail`,{email:this.email});
+          axios.post(`http://34.16.184.217:3000/api/sendmail`,{email:this.email});
       }
     },
 

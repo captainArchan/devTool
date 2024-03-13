@@ -37,7 +37,7 @@ export default {
   methods: {
     reset(){
       localStorage.removeItem("Token");
-      window.location.href = `http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/login`
+      window.location.href = `http://34.125.201.146:8088/login`
     }
   },
 };

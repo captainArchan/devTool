@@ -42,6 +42,7 @@ export default {
           console.log(res.data.email);
           console.log(res.data.token)
           localStorage.setItem("Token", res.data.token);
+          localStorage.setItem("email", res.data.email)
           window.location.href = `http://34.125.201.146:8088/home`;
           
           // this.$router.push('home')

@@ -76,7 +76,7 @@ import GraphPageVue from '../components/GraphPage.vue';
       const urlParams = new URLSearchParams(window.location.search);
 
       const dataParam = urlParams.get('data');
-      this.email = urlParams.get('email')
+      this.email = localStorage.getItem('email')
 
 
       const dataObject = JSON.parse(decodeURIComponent(dataParam));

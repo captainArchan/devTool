@@ -34,6 +34,7 @@ export default {
     async submit() {
       const { username, password } = this;
       console.log(username);
+      console.log(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/authen/login`);
       await axios.post(`http://${_env.VITE_APP_HOST}:${_env.VITE_APP_PORT}/api/authen/login`, {
         username, password
       })
@@ -45,6 +46,7 @@ export default {
           
           // this.$router.push('home')
           console.log(res.data);
+
         })
         .catch(error => {
           console.log(error);

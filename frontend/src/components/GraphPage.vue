@@ -39,7 +39,7 @@ export default {
       return currentDate.toDateString();
     },
     async renderChart() {
-      await axios.get(`http://${_env.VITE_APP_CLIENT_HOST}:${_env.VITE_APP_CLIENT_PORT}/api/dust/graph`)
+      await axios.get(`http://34.16.184.217:3000/api/dust/graph`)
         .then(response => {
           console.log(response.data);
           this.pm = response.data.pm;

@@ -73,7 +73,7 @@
 
       <div class="input">
         <label>Address</label>
-        <textarea class="form-control" type="text" name="address" placeholder="Ladkrabang Soi 13"></textarea>
+        <textarea class="form-control" v-model="address" type="text" name="address" placeholder="Ladkrabang Soi 13"></textarea>
       </div>
 
 

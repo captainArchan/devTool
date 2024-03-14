@@ -17,7 +17,7 @@ const authentication = async (req, res) =>{
         const user = await User.findOne({username: username});
 
         // if have no username in collection return Badrequest
-        if (!user){
+        if (user != null){
             return res.json({message: "User not Found."}).status(400);
         }
 
@@ -25,7 +25,7 @@ const authentication = async (req, res) =>{
         // return boolean
         const password_Match = await bcrypt.compare(password, user.password);
 
-        if (!password_Match){
+        if (password_Match == false){
             return res.json({message: "User not Found."}).status(401);
         }
 

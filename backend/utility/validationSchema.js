@@ -6,7 +6,7 @@ module.exports.userSchema = Joi.object({
     fname: Joi.string().required().min(2).max(20),
     lname: Joi.string().required().min(2).max(20),
     email: Joi.email().required(),
-    tel: Joi.number().integer().positive(),
+    tel: Joi.string().required().max(10).min(10),
     address: Joi.string().allow("").required(),
 });
 

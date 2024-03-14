@@ -13,7 +13,7 @@ const authentication = async (req, res) =>{
         const {username, password} = req.body;
         // const username = req.body.username;
         // const password = req.body.password;
-        console.log(username);
+        console.log(username, password);
         const user = await User.findOne({username: username});
 
         // if have no username in collection return Badrequest
@@ -24,6 +24,8 @@ const authentication = async (req, res) =>{
         // verify password, compare password between hashcode
         // return boolean
         const password_Match = await bcrypt.compare(password, user.password);
+
+        console.log(password_Match);
 
         if (!password_Match){
             return res.json({message: "User not Found."}).status(401);

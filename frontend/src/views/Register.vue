@@ -170,6 +170,7 @@ export default {
         .post(`http://34.16.184.217:3000/api/user/`, data)
         .then((res) => {
           console.log(res.data);
+          window.location.href = "http://34.125.201.146:8088/login";
         })
         .catch((e) => {
           console.log(e);

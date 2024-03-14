@@ -13,11 +13,12 @@ const authentication = async (req, res) =>{
         const {username, password} = req.body;
         // const username = req.body.username;
         // const password = req.body.password;
-        console.log(username);
+        console.log(username, password);
         const user = await User.findOne({username: username});
-
+        console.log("USER:", user);
+        
         // if have no username in collection return Badrequest
-        if (user != null){
+        if (!user){
             return res.json({message: "User not Found."}).status(400);
         }
 
@@ -25,7 +26,9 @@ const authentication = async (req, res) =>{
         // return boolean
         const password_Match = await bcrypt.compare(password, user.password);
 
-        if (password_Match == false){
+        console.log(password_Match);
+
+        if (!password_Match){
             return res.json({message: "User not Found."}).status(401);
         }
 

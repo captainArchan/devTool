@@ -77,7 +77,7 @@
       </div>
 
 
-      <button type="submit" @click="submit()" id="login_button">
+      <button type="button" @click="submit()" id="login_button">
         Register
       </button>
     </form>
@@ -159,7 +159,7 @@ export default {
         email: this.email,
         fullname: this.name,
         password: this.password,
-        amphur: this.amphur,
+        amphur: this.amphur, 
         tumbon: this.tambon,
         province: this.province,
         address: this.address,

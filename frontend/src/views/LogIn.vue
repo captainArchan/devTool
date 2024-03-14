@@ -36,7 +36,7 @@ export default {
       console.log(username);
       console.log(`http://34.16.184.217:3000/api/authen/login`);
       await axios.post(`http://34.16.184.217:3000/api/authen/login`, {
-        username, password
+        username: this.username, password: this.password
       })
         .then(res => {
           if(res.data.token != null) {
